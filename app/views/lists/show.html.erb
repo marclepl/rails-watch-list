@@ -1,8 +1,27 @@
-<h1><%= @list.name %></h1>
-<p><%= @bookmark.comment %></p>
-<div class="container">
-    <% Bookmark.select { |element| element.list_id == list.id }.each do |bookmark| %>
-      <p><%= bookmark.movie.title %></p>
-      <p><%= bookmark.movie.overview %><p>
-    <% end %>
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://unsplash.com/photos/CiUR8zISX60);">
+   <div class="container"> 
+      <h2><%= @list.name %></h2>
+    </div>
 </div>
+
+<% @list.bookmarks.each do |bookmark| %>
+  <div class="card-trip">
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+    <div class="card-trip-infos">
+      <div>
+      <ul>
+        <li><strong>Movie title:</strong> <%= "#{bookmark.movie.title}" %></li>
+        <li><strong>Movie Overview:</strong> <%= "#{bookmark.movie.overview}" %></li>
+        <li><strong>Movie Rating:</strong> <%= "#{bookmark.movie.rating}" %></li>
+        <li><strong>Movie Comments:</strong> <%= "#{bookmark.comment}" %></li>
+        <%= link_to "Delete", bookmark_path(bookmark.id), method: :delete, data: { confirm: "Are you sure?" } %>
+      </ul>
+      </div>
+    </div>
+  </div>
+<% end %> 
+
+  <%= link_to 'Add a movie', new_list_bookmark_path(@list) %>
+
+  <%= link_to "Back to lists", lists_path %>
+

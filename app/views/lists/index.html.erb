@@ -1,12 +1,17 @@
-<h1>My Lists</h1>
-<div class="container">
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= list.name %></li>
-    <p><%= link_to list.name, list_path(id: list.id) %></p>
-    <p><%= link_to "Delete a list", list_path(id: list.id), method: :delete, :data => {:confirm => 'Are you sure?'} %></p>
-  <% end %>
-  <p><%= link_to "Create a new list", new_list_path %></p>
-</ul>
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://unsplash.com/photos/CiUR8zISX60);">
+   <div class="container"> 
+      <h1>My Favourite Movies</h1>
+      <h2>Your resource for the best movie ratings here</h2>
+      <p><%= link_to "Create a new list", new_list_path %></p>
+    </div>
 </div>
+
+<% @lists.each do |list| %>
+  <div class="card-product mb-4">
+    <img src="https://source.unsplash.com/random" />
+    <div class="card-product-infos">
+      <%= link_to list.name, list_path(id: list.id) %>
+    </div>
+  </div>
+<% end %>
 

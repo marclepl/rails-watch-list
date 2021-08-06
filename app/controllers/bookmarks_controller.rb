@@ -4,21 +4,27 @@ class BookmarksController < ApplicationController
     end
     
     def create
-        @bookmark = Bookmark.find(bookmark_params)
-        @bookmark.save
-        redirect_to lists_path
+        @bookmark = Bookmark.new(bookmark_params)
+        @list = List.find(params[:list_id])
+        @bookmark.list = @list
+        if @bookmark.save
+            redirect_to list_path(@list)
+        else
+            render :new
+        end
     end
 
     def destroy
         @bookmark = Bookmark.find(params[:id])
         @bookmark.delete
-        redirect_to lists_path
+        redirect_to list_path(@list)
     end
 
     private
 
     def bookmark_params
         params.require(:bookmark).permit(
+            :id, 
             :comment
         )
     end

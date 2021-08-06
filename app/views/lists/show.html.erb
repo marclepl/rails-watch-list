@@ -1,0 +1,8 @@
+<h1><%= @list.name %></h1>
+<p><%= @bookmark.comment %></p>
+<div class="container">
+    <% Bookmark.select { |element| element.list_id == list.id }.each do |bookmark| %>
+      <p><%= bookmark.movie.title %></p>
+      <p><%= bookmark.movie.overview %><p>
+    <% end %>
+</div>
